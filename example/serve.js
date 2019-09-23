@@ -2,7 +2,7 @@
  * @Description: file content
  * @Author: drank
  * @Date: 2019-09-19 23:37:24
- * @LastEditTime: 2019-09-20 00:20:56
+ * @LastEditTime: 2019-09-23 23:19:20
  */
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -35,9 +35,34 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 router.get('/simple/get', function(req, res) {
   res.json({
-    msg: 'Hello World.'
+    msg: 'Hello Simple.'
   })
 })
+
+router.get('/base/get', function(req, res) {
+  res.json(req.body);
+})
+
+router.post('/base/post', function(req, res) {
+  console.log('/base/post', req.body);
+  
+  res.json(req.body);
+})
+
+router.post('/base/buffer', function(req, res) {
+  let msg = [];
+
+  req.on('data', chunk => {
+    if (chunk) {
+      msg.push(chunk)
+    }
+  });
+
+  req.on('end', () => {
+    let buf = Buffer.concat(msg);
+    res.json(buf.toJSON());
+  })
+});
 
 app.use(router);
 
