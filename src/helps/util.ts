@@ -18,4 +18,10 @@ export function isDate(val: any): val is Date {
   return tostring.call(val) === '[object Date]';
 }
 
+export function getSearchByName(name: string): string {
+  const match = RegExp(`[?&]${name}=([^&]*)`).exec(window.location.href);
+
+  return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
 
