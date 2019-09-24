@@ -1,9 +1,8 @@
-import request from '@/service/api';
 /*
  * @Description: file content
  * @Author: drank
  * @Date: 2019-09-19 22:41:04
- * @LastEditTime: 2019-09-24 23:15:35
+ * @LastEditTime: 2019-09-25 00:13:09
  */
 type Method = 'get' | 'GET'
   | 'post' | 'POST'
@@ -14,7 +13,7 @@ type Method = 'get' | 'GET'
   | 'head' | 'HEAD';
 
 export interface AxiosRequestConfig {
-  url: string;
+  url?: string;
   method?: Method;
   headers?: any;
   data?: any;
@@ -24,11 +23,11 @@ export interface AxiosRequestConfig {
 }
 
 export interface AxiosResponse {
-  data: any;
-  status: number;
-  statusText: string;
-  headers: any;
-  config: AxiosRequestConfig;
+  data?: any;
+  status?: number;
+  statusText?: string;
+  headers?: any;
+  config?: AxiosRequestConfig;
   request?: any
 }
 
@@ -40,4 +39,19 @@ export interface AxiosError extends Error {
   request?: any;
   response?: AxiosResponse;
   isAxiosError?: boolean;
+}
+
+export interface Axios {
+  request(config: AxiosRequestConfig): AxiosPromise;
+  get(url: string, config?: AxiosRequestConfig): AxiosPromise;
+  delete(url: string, config?: AxiosRequestConfig): AxiosPromise;
+  head(url: string, config?: AxiosRequestConfig): AxiosPromise;
+  options(url: string, config?: AxiosRequestConfig): AxiosPromise;
+  post(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise;
+  put(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise;
+  patch(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise;
+}
+
+export interface AxiosInstance extends Axios {
+  (config: AxiosRequestConfig): AxiosPromise;
 }

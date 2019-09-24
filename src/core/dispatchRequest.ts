@@ -1,17 +1,17 @@
-import { AxiosRequestConfig, AxiosPromise } from './types';
-import xhr from './core/xhr';
-import { buildURL } from './helps/url';
-import { transformRequest, transformResponse } from './helps/data';
-import { processHeaders } from './helps/headers';
-import { AxiosResponse } from './types/index';
+import { AxiosRequestConfig, AxiosPromise } from '../types';
+import xhr from './xhr';
+import { buildURL } from '../helps/url';
+import { transformRequest, transformResponse } from '../helps/data';
+import { processHeaders } from '../helps/headers';
+import { AxiosResponse } from '../types/index';
 
 /*
  * @Description: file content
  * @Author: drank
  * @Date: 2019-09-19 21:57:22
- * @LastEditTime: 2019-09-24 23:51:36
+ * @LastEditTime: 2019-09-24 23:49:45
  */
-function axios(config: AxiosRequestConfig): AxiosPromise {
+export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromise {
   processConfig(config);
   return xhr(config).then(res => {
     return transformResponseData(res);
@@ -29,7 +29,7 @@ function processConfig(config: AxiosRequestConfig): void {
 function transformURL(config: AxiosRequestConfig): string {
   const { url, params } = config;
 
-  return buildURL(url!, params);
+  return buildURL(url, params);
 }
 
 function transformRequestData(config: AxiosRequestConfig): any {
@@ -47,5 +47,3 @@ function transformResponseData(res: AxiosResponse): AxiosResponse {
 
   return res;
 }
-
-export default axios;

@@ -1,10 +1,9 @@
 import { AxiosRequestConfig, AxiosResponse } from '../types/index';
-import request from '@/service/api';
 /*
  * @Description: file content
  * @Author: drank
  * @Date: 2019-09-24 23:16:00
- * @LastEditTime: 2019-09-24 23:26:03
+ * @LastEditTime: 2019-09-25 00:21:17
  */
 
 export class AxiosError extends Error{
@@ -40,7 +39,7 @@ export function createError(
   request?: any,
   response?: AxiosResponse
 ): any {
-  const error = new AxiosError(message, config, code, request, response);
+  // const error = new AxiosError(message, config, code, request, response);
 
-  return error;
+  // return error;
 }

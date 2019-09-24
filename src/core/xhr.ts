@@ -1,11 +1,11 @@
-import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types/index';
-import { parseHeaders } from './helps/headers';
-import { createError } from './helps/error';
+import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types/index';
+import { parseHeaders } from '../helps/headers';
+import { createError } from '../helps/error';
 /*
  * @Description: file content
  * @Author: drank
  * @Date: 2019-09-19 22:51:07
- * @LastEditTime: 2019-09-24 23:29:56
+ * @LastEditTime: 2019-09-25 00:10:06
  */
 
 export  default function xhr(config: AxiosRequestConfig): AxiosPromise {
@@ -36,10 +36,10 @@ export  default function xhr(config: AxiosRequestConfig): AxiosPromise {
       handleResponse(response);
     }
     request.ontimeout = function handleTimeout() {
-      reject(createError(`Request timeout outtime is ${timeout}`, config, null, request));
+      reject(createError(`Request timeout outtime is ${timeout}`, config, null, request, null));
     }
     request.onerror = function handleError() {
-      reject(createError('Network Error...', config, 'ECONNABORTED', request));
+      reject(createError('Network Error...', config, 'ECONNABORTED', request, null));
     }
 
     Object.keys(headers).forEach(name => {
