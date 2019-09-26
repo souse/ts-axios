@@ -2,9 +2,18 @@
  * @Description: file content
  * @Author: drank
  * @Date: 2019-09-23 22:14:25
- * @LastEditTime: 2019-09-24 00:28:44
+ * @LastEditTime: 2019-09-26 07:17:35
  */
 import axios from '../../src/index';
+
+axios.get('/base/get', {
+  params: {
+    foo: {
+      bar: 'baz'
+    }
+  }
+});
+
 
 // axios({
 //   method: 'get',
@@ -34,28 +43,28 @@ import axios from '../../src/index';
 //   }
 // })
 
-axios({
-  method: 'post',
-  url: '/base/post',
-  data: {
-    foo: 1,
-    bar: 2
-  }
-}).then(res => {
-  console.log(res);
-})
+// axios({
+//   method: 'post',
+//   url: '/base/post',
+//   data: {
+//     foo: 1,
+//     bar: 2
+//   }
+// }).then(res => {
+//   console.log(res);
+// })
 
-axios({
-  method: 'post',
-  url: '/base/post',
-  headers: {
-    'Content-Type': 'application/json;charset=utf-8'
-  },
-  responseType: 'json',
-  data: {
-    a: 1,
-    b: 2
-  }
-}).then(res => {
-  console.log(res);
-})
+// axios({
+//   method: 'post',
+//   url: '/base/post',
+//   headers: {
+//     'Content-Type': 'application/json;charset=utf-8'
+//   },
+//   responseType: 'json',
+//   data: {
+//     a: 1,
+//     b: 2
+//   }
+// }).then(res => {
+//   console.log(res);
+// })

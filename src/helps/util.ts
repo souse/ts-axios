@@ -2,7 +2,7 @@
  * @Description: file content
  * @Author: drank
  * @Date: 2019-09-20 22:20:16
- * @LastEditTime: 2019-09-23 22:30:31
+ * @LastEditTime: 2019-09-26 07:04:06
  */
 const tostring = Array.prototype.toString;
 
@@ -24,4 +24,10 @@ export function getSearchByName(name: string): string {
   return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
 
+export function extend<T, U>(to: T, from: U): T & U {
+  for (let key in from) {
+    ;(to as T & U)[key] = from[key] as any;
+  }
 
+  return to as T & U;
+}

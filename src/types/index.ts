@@ -2,9 +2,9 @@
  * @Description: file content
  * @Author: drank
  * @Date: 2019-09-19 22:41:04
- * @LastEditTime: 2019-09-25 00:13:09
+ * @LastEditTime: 2019-09-26 07:25:19
  */
-type Method = 'get' | 'GET'
+export type Method = 'get' | 'GET'
   | 'post' | 'POST'
   | 'delete' | 'DELETE'
   | 'put' | 'PUT'
@@ -54,4 +54,5 @@ export interface Axios {
 
 export interface AxiosInstance extends Axios {
   (config: AxiosRequestConfig): AxiosPromise;
+  (url?: string, config?: AxiosRequestConfig): AxiosPromise;
 }
