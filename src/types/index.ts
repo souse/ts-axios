@@ -20,6 +20,8 @@ export interface AxiosRequestConfig {
   params?: any;
   timeout?: number;
   responseType?: XMLHttpRequestResponseType;
+  transformRequest?: AxiosTransFormer | AxiosTransFormer[];
+  transformResponse?: AxiosTransFormer | AxiosTransFormer[];
 
   [propName: string]: any;
 }
@@ -73,6 +75,10 @@ export interface AxiosInstance extends Axios {
   <T = any>(url?: string, config?: AxiosRequestConfig): AxiosPromise<T>;
 }
 
+export interface AxiosStatic extends AxiosInstance {
+  create(config?: AxiosRequestConfig): AxiosInstance;
+}
+
 export interface AxiosInterceptorManger<T> {
   use(resolve: ResolvedFn<T>, reject?: RejectedFn): number;
   eject(id: number): void;
@@ -84,4 +90,8 @@ export interface ResolvedFn<T> {
 
 export interface RejectedFn {
   (error: any): any
+}
+
+export interface AxiosTransFormer {
+  (data: any, header: any): any; 
 }

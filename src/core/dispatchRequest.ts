@@ -4,6 +4,7 @@ import { buildURL } from '../helps/url';
 import { transformRequest, transformResponse } from '../helps/data';
 import { processHeaders, flattenHeaders } from '../helps/headers';
 import { AxiosResponse } from '../types/index';
+import transform from './transform';
 
 /*
  * @Description: file content
@@ -20,7 +21,8 @@ export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromis
 
 function processConfig(config: AxiosRequestConfig): void {
   config.url = transformURL(config);
-  config.headers = transfromHeaders(config);
+  // config.headers = transfromHeaders(config);
+  config.headers = transform(config.data, config.headers, config.transformRequest);
   if (config.data) {
     config.data = transformRequestData(config);
   }
@@ -44,7 +46,8 @@ function transfromHeaders(config: AxiosRequestConfig): any {
 }
 
 function transformResponseData(res: AxiosResponse): AxiosResponse {
-  res.data = transformResponse(res.data);
+  // res.data = transformResponse(res.data);
+  res.data = transform(res.data, res.headers, res.config.transformResponse);
 
   return res;
 }
