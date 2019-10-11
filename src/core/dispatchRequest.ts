@@ -2,7 +2,7 @@ import { AxiosRequestConfig, AxiosPromise } from '../types';
 import xhr from './xhr';
 import { buildURL } from '../helps/url';
 import { transformRequest, transformResponse } from '../helps/data';
-import { processHeaders } from '../helps/headers';
+import { processHeaders, flattenHeaders } from '../helps/headers';
 import { AxiosResponse } from '../types/index';
 
 /*
@@ -23,7 +23,8 @@ function processConfig(config: AxiosRequestConfig): void {
   config.headers = transfromHeaders(config);
   if (config.data) {
     config.data = transformRequestData(config);
-  } 
+  }
+  config.headers = flattenHeaders(config.headers, config.method!);
 }
 
 function transformURL(config: AxiosRequestConfig): string {

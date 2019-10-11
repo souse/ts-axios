@@ -68,3 +68,25 @@ axios.get('/base/get', {
 // }).then(res => {
 //   console.log(res);
 // })
+interface ResponseData<T = any> {
+  code: number;
+  result: T;
+  message: string;
+}
+
+interface User {
+  name: string;
+  age: number;
+}
+
+export function getUser<T>() {
+  return axios.get<ResponseData<T>>('/base/get')
+    .then(res => res.data);
+}
+
+async function test() {
+  const user = await getUser<User>();
+
+  console.log(user.result.name);
+  
+}
