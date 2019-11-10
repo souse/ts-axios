@@ -22,6 +22,7 @@ export interface AxiosRequestConfig {
   responseType?: XMLHttpRequestResponseType;
   transformRequest?: AxiosTransFormer | AxiosTransFormer[];
   transformResponse?: AxiosTransFormer | AxiosTransFormer[];
+  cancelToken?: CancelToken
 
   [propName: string]: any;
 }
@@ -94,4 +95,27 @@ export interface RejectedFn {
 
 export interface AxiosTransFormer {
   (data: any, header: any): any; 
+}
+
+export interface CancelToken {
+  promise: Promise<string>;
+  reason?: string;
+}
+
+export interface Canceler {
+  (message?: string): void;
+}
+
+export interface CancelExecutor {
+  (cancel: Canceler): void;
+}
+
+export interface CancelTokenSource {
+  token: CancelToken;
+  cancel: Canceler
+}
+
+export interface CancelTokenStatic {
+  new(executor: CancelExecutor): CancelToken;
+  source(): CancelTokenSource;
 }
